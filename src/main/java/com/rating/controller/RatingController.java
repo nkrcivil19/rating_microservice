@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rating.entity.Rating;
 import com.rating.service.RatingService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/ratings")
+@Slf4j
 public class RatingController {
 
 	private RatingService ratingService;
@@ -28,6 +31,7 @@ public class RatingController {
 	public ResponseEntity<Rating> create(@RequestBody Rating rating) {
 		Rating ratingResponse = ratingService.create(rating);
 		if (ratingResponse != null) {
+			log.info("This is an info log message");
 			return ResponseEntity.status(HttpStatus.CREATED).body(ratingResponse);
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ratingResponse);
